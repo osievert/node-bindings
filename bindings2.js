@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -18,9 +17,11 @@ var fs = require('fs')
       , try: [
           // node-gyp's linked version in the "build" dir
           [ 'module_root', 'build', 'bindings' ]
-          // node-waf and gyp_addon (a.k.a node-gyp)
+          // cmake-js, node-waf, and gyp_addon (a.k.a node-gyp)
         , [ 'module_root', 'build', 'Debug', 'bindings' ]
+        , [ 'module_root', 'node_modules', 'bindings_name', 'build', 'Debug', 'bindings' ]
         , [ 'module_root', 'build', 'Release', 'bindings' ]
+        , [ 'module_root', 'node_modules', 'bindings_name', 'build', 'Release', 'bindings' ]
           // Debug files, for development (legacy behavior, remove for node v0.9)
         , [ 'module_root', 'out', 'Debug', 'bindings' ]
         , [ 'module_root', 'Debug', 'bindings' ]
@@ -40,9 +41,9 @@ var fs = require('fs')
  * being invoked from, which is then used to find the root directory.
  */
 
-function bindings (opts) {
+function bindings2 (opts) {
 
-  // Argument surgery
+  // if opts is a string treat it as the name of the module
   if (typeof opts == 'string') {
     opts = { bindings: opts }
   } else if (!opts) {
@@ -59,6 +60,8 @@ function bindings (opts) {
   if (path.extname(opts.bindings) != '.node') {
     opts.bindings += '.node'
   }
+
+  opts.bindings_name = opts.bindings.replace('.node', '')
 
   var tries = []
     , i = 0
@@ -85,13 +88,13 @@ function bindings (opts) {
     }
   }
 
-  err = new Error('Could not locate the bindings file. Tried:\n'
+  err = new Error('Could not locate the ' + opts.bindings_name + ' addon. Tried:\n'
     + tries.map(function (a) { return opts.arrow + a }).join('\n'))
   err.tries = tries
   throw err
 }
-module.exports = exports = bindings
 
+module.exports = exports = bindings2
 
 /**
  * Gets the filename of the JavaScript file that invokes this function.

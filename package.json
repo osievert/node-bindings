@@ -1,5 +1,5 @@
 {
-  "name": "bindings",
+  "name": "bindings2",
   "description": "Helper module for loading your native module's .node file",
   "keywords": [
     "native",
@@ -10,16 +10,16 @@
     "c",
     "c++"
   ],
-  "version": "1.2.1",
-  "author": "Nathan Rajlich <nathan@tootallnate.net> (http://tootallnate.net)",
+  "version": "1.3.0",
+  "author": "Nathan Rajlich <nathan@tootallnate.net> (http://tootallnate.net) and others",
   "repository": {
     "type": "git",
-    "url": "git://github.com/TooTallNate/node-bindings.git"
+    "url": "git://github.com/osievert/node-bindings.git"
   },
-  "main": "./bindings.js",
+  "main": "./bindings2.js",
   "bugs": {
-    "url": "https://github.com/TooTallNate/node-bindings/issues"
+    "url": "https://github.com/osievert/node-bindings/issues"
   },
-  "homepage": "https://github.com/TooTallNate/node-bindings",
+  "homepage": "https://github.com/osievert/node-bindings",
   "license": "MIT"
 }
